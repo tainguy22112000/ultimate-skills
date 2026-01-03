@@ -1,0 +1,246 @@
+---
+alwaysApply: true
+---
+
+# Cursor JavaScript Rules (Strict – Clean, Performant, Leak‑Free)
+
+> These rules apply to **all JavaScript / TypeScript code** generated or modified by Cursor.
+> Goal: **clean, readable, performant code with zero avoidable memory leaks**.
+
+---
+
+## 1. Core JavaScript Principles (MANDATORY)
+
+### ❌ Forbidden
+
+- Large functions (>20–30 lines)
+- Nested conditionals deeper than 2 levels
+- Clever one‑liners that hurt readability
+- Hidden side effects
+- Silent error swallowing (`catch {}`)
+- Global mutable state
+- Mixing concerns in one function
+
+### ✅ Required
+
+- Clarity over cleverness
+- Small, focused functions
+- Explicit control flow
+- Predictable data transformation
+- Fail fast, fail loudly
+
+---
+
+## 2. Function Design Rules
+
+### Rules
+
+- One function = one responsibility
+- Functions must do **one thing**
+- Prefer **pure functions** whenever possible
+
+### ❌ Bad
+
+```js
+function handle() {
+  validate()
+  format()
+  fetch()
+  log()
+}
+```
+
+### ✅ Good
+
+```js
+function handle() {
+  if (!isValid()) return
+  submit()
+}
+```
+
+---
+
+## 3. Naming Conventions (NON‑NEGOTIABLE)
+
+### Rules
+
+- Verbs for actions, nouns for data
+- Names must explain intent
+- Avoid generic names
+
+### ❌ Bad
+
+```js
+const data = fn(a)
+```
+
+### ✅ Good
+
+```js
+const userProfile = buildUserProfile(input)
+```
+
+---
+
+## 4. Control Flow Best Practices
+
+### Use Early Returns
+
+❌ Bad
+
+```js
+if (a) {
+  if (b) {
+    doWork()
+  }
+}
+```
+
+✅ Good
+
+```js
+if (!a || !b) return
+doWork()
+```
+
+---
+
+## 5. Immutability Rules
+
+### ❌ Forbidden
+
+- Mutating input parameters
+- In‑place array/object mutation
+
+### ✅ Required
+
+```js
+const updatedUser = { ...user, age: user.age + 1 }
+```
+
+---
+
+## 6. Performance Rules
+
+### Required
+
+- Avoid unnecessary allocations in loops
+- Avoid repeated object creation in hot paths
+- Prefer `for` / `for...of` in performance‑critical code
+
+### ❌ Bad
+
+```js
+items.map(x => ({ value: x }))
+```
+
+### ✅ Good
+
+```js
+const result = []
+for (const x of items) result.push({ value: x })
+```
+
+---
+
+## 7. Async & Promise Rules (CRITICAL)
+
+### ❌ Forbidden
+
+- Ignoring Promises
+- Fire‑and‑forget async calls
+
+### ✅ Required
+
+- Always `await` promises
+- Always handle errors
+- Use `AbortController` when cancellation is possible
+
+```js
+const controller = new AbortController()
+fetch(url, { signal: controller.signal })
+controller.abort()
+```
+
+---
+
+## 8. Memory Leak Prevention (MANDATORY)
+
+### Cleanup Rules
+
+Cursor MUST always:
+
+- Clear timers (`setTimeout`, `setInterval`)
+- Remove event listeners
+- Revoke object URLs
+- Abort async work
+
+### ❌ Bad
+
+```js
+URL.createObjectURL(file)
+```
+
+### ✅ Good
+
+```js
+const url = URL.createObjectURL(file)
+URL.revokeObjectURL(url)
+```
+
+---
+
+## 9. Data Structures Rules
+
+### Choose the right structure
+
+| Use case                 | Use       |
+| ------------------------ | --------- |
+| Fast lookup              | `Map`     |
+| Unique values            | `Set`     |
+| Object‑keyed metadata    | `WeakMap` |
+| Object lifetime tracking | `WeakSet` |
+
+---
+
+## 10. Error Handling Rules
+
+### ❌ Forbidden
+
+```js
+try {
+  doWork()
+} catch {}
+```
+
+### ✅ Required
+
+```js
+try {
+  doWork()
+} catch (err) {
+  logError(err)
+  throw err
+}
+```
+
+---
+
+## 11. Utility Rules
+
+### Utilities MUST:
+
+- Be pure
+- Have no side effects
+- Be testable
+- Live outside business logic
+
+---
+
+## 12. Code Size & Complexity Limits
+
+Cursor MUST stop and refactor if:
+
+- A function exceeds **30 lines**
+- Nesting exceeds \*\*2 level
