@@ -1,0 +1,76 @@
+---
+alwaysApply: true
+---
+- "\*_/_.tsx"
+- "\*_/_.ts"
+
+# Use functional components with TypeScript annotations
+
+- when:
+  - file: "\*_/_.tsx"
+  - contains: "export const"
+    enforce:
+  - rule: "use-hooks"
+  - message: "Use React functional components with hooks rather than class components"
+
+# Use React Hook Form patterns with Controller components
+
+- when:
+  - file: "\*_/_.tsx"
+  - contains: "useForm"
+    suggest:
+  - code-snippet: |
+    import { useForm, Controller } from 'react-hook-form'
+    message: "Use React Hook Form and Controller for complex form fields and inputs"
+
+# Match imports style for components and hooks
+
+- when:
+  - file: "\*_/_.tsx"
+  - contains: "import"
+    style:
+  - rule: "group-imports"
+  - config: "external modules first, then '@/...' internal imports"
+
+# Suggest use of React Query hooks
+
+- when:
+  - file: "\*_/_.tsx"
+  - contains: "@tanstack/react-query"
+    suggest:
+  - message: "Use React Query hooks such as useQuery, useMutation for data fetching and mutations"
+
+# TailwindCSS class usage enforcement
+
+- when:
+  - file: "\*_/_.tsx"
+  - contains: "className="
+    enforce:
+  - rule: "tailwind-utility-classes"
+  - message: "Use TailwindCSS utility classes for styling; avoid inline styles"
+
+# Zero tolerance on unused state or effects
+
+- when:
+  - file: "\*_/_.tsx"
+  - contains: ["useState", "useEffect"]
+    check:
+  - rule: "no-unused-vars"
+  - message: "Ensure all state and effects are used properly; remove unused ones"
+
+# Use async/await for asynchronous form submission/handling
+
+- when:
+  - file: "\*_/_.tsx"
+  - contains: "async"
+    suggest:
+  - message: "Prefer async/await syntax for asynchronous operations"
+
+# Encourage destructuring props and variables
+
+- when:
+  - file: "\*_/_.tsx"
+  - contains: "props"
+    enforce:
+  - rule: "prefer-destructuring"
+  - message: "Destructure props and objects in function parameters and variable declarations"
