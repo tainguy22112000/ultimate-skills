@@ -14,7 +14,7 @@ usage() {
   cat <<EOF
 Ultimate Skills: manage Claude Code and Cursor skills and rules.
 
-Usage: us <command> [args]
+Usage: ultimate-skills <command> [args]
 
 Commands:
   install [--force]                 Link skills and rules into ~/.claude and ~/.cursor
@@ -23,7 +23,7 @@ Commands:
   deinit <project>                  Remove what init copied into a project
   update [--no-pull]                Pull, then refresh the global install and all projects
 
-Run 'us <command> -h' for details.
+Run 'ultimate-skills <command> -h' for details.
 EOF
 }
 

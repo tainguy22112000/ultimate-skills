@@ -8,6 +8,7 @@ NAMESPACE="ultimate-skills"
 MANIFEST_NAME=".ultimate-skills"
 STATE_DIR="$HOME/.ultimate-skills"
 REGISTRY="$STATE_DIR/projects"
+BIN_LINK="$HOME/.local/bin/ultimate-skills"
 
 info() { printf '  %s\n' "$*"; }
 ok()   { printf '\033[32m✓\033[0m %s\n' "$*"; }

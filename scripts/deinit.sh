@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Remove everything a previous `us init` installed into a project.
+# Remove everything a previous `ultimate-skills init` installed into a project.
 source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 
 usage() {
   cat <<EOF
-Usage: us deinit <project>
+Usage: ultimate-skills deinit <project>
 
-Removes the rules and skills that 'us init' copied into <project>,
+Removes the rules and skills that 'ultimate-skills init' copied into <project>,
 using <project>/$MANIFEST_NAME. Files you added yourself are left alone.
 EOF
 }

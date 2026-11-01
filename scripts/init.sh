@@ -4,7 +4,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 
 usage() {
   cat <<EOF
-Usage: us init <project> [selector...] [--force]
+Usage: ultimate-skills init <project> [selector...] [--force]
 
 Copies rules and skills into <project>/.claude and <project>/.cursor.
 Re-running init replaces what a previous init installed.
@@ -86,7 +86,7 @@ while IFS= read -r item; do
 done <<< "$items"
 
 {
-  echo "# Managed by ultimate-skills ($REPO_ROOT). Do not edit; use 'us init' / 'us deinit'."
+  echo "# Managed by ultimate-skills ($REPO_ROOT). Do not edit; use 'ultimate-skills init' / 'ultimate-skills deinit'."
   for entry in ${entries[@]+"${entries[@]}"}; do
     printf '%s\n' "$entry"
   done

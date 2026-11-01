@@ -9,7 +9,7 @@ skills/<category>/<name>/SKILL.md   # Agent skills (same format for Claude and C
 rules/<category>/<name>.md          # Rules, written once in Claude format
 scripts/                            # CLI implementation (bash, no dependencies)
 docs/                               # Notes and reference material
-us                                  # CLI entry point
+ultimate-skills                     # CLI entry point
 ```
 
 The layout follows [`mattpocock/skills`](https://github.com/mattpocock/skills), so `npx skills add <owner>/ultimate-skills` also works for the skills.
@@ -38,21 +38,30 @@ When a rule is installed into a project, a Cursor `.mdc` file is generated from 
 
 ## Commands
 
+First run, from the repo root (this also puts `ultimate-skills` on your PATH via `~/.local/bin`):
+
 ```bash
-./us install            # symlink skills + rules into ~/.claude and ~/.cursor
-./us uninstall          # remove those symlinks
-./us init ~/code/app    # copy everything into a project's .claude/ and .cursor/
-./us init ~/code/app rules/frontend skills/engineering/clean-code
-./us deinit ~/code/app  # remove only what init added
-./us update             # git pull, then refresh the global install and every init'ed project
+./ultimate-skills install
 ```
 
-Run `./us <command> -h` for details. To call it from anywhere: `ln -s "$PWD/us" /usr/local/bin/us`.
+After that, from anywhere:
+
+```bash
+ultimate-skills install            # symlink skills + rules into ~/.claude and ~/.cursor
+ultimate-skills uninstall          # remove those symlinks (and the PATH link)
+ultimate-skills init ~/code/app    # copy everything into a project's .claude/ and .cursor/
+ultimate-skills init . rules/frontend skills/engineering/clean-code
+ultimate-skills deinit ~/code/app  # remove only what init added
+ultimate-skills update             # git pull, then refresh the global install and every init'ed project
+```
+
+Run `ultimate-skills <command> -h` for details.
 
 ### install / uninstall (global)
 
 - `skills/<category>/<name>` → `~/.claude/skills/<name>` and `~/.cursor/skills/<name>`
 - `rules/` → `~/.claude/rules/ultimate-skills`
+- `ultimate-skills` CLI → `~/.local/bin/ultimate-skills`
 - Cursor has no file-based global rules. To get Cursor rules, use `init` per project.
 - Existing entries that aren't ours (for example, skills installed by `npx skills`) are skipped with a warning. Pass `--force` to replace them.
 - Links are symlinks, so edits in this repo take effect immediately.
@@ -76,4 +85,4 @@ Run `./us <command> -h` for details. To call it from anywhere: `ln -s "$PWD/us" 
 ## Adding a skill or rule
 
 1. Create `skills/<category>/<name>/SKILL.md` or `rules/<category>/<name>.md`.
-2. Run `./us update --no-pull`, or wait for your next `./us update`.
+2. Run `ultimate-skills update --no-pull`, or wait for your next `ultimate-skills update`.

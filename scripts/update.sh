@@ -4,11 +4,11 @@ source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 
 usage() {
   cat <<EOF
-Usage: us update [--no-pull]
+Usage: ultimate-skills update [--no-pull]
 
 1. git pull --ff-only in this repo (skip with --no-pull)
-2. Re-run 'us install' if the global install is present
-3. Re-run 'us init' for every project in $REGISTRY,
+2. Re-run 'ultimate-skills install' if the global install is present
+3. Re-run 'ultimate-skills init' for every project in $REGISTRY,
    keeping each project's selectors; projects that no longer exist are dropped
 
 Options:
@@ -34,7 +34,7 @@ fi
 if is_our_link "$HOME/.claude/rules/$NAMESPACE"; then
   bash "$scripts/install.sh"
 else
-  info "Global install not found; skipping (run 'us install' to set it up)"
+  info "Global install not found; skipping (run 'ultimate-skills install' to set it up)"
 fi
 
 if [ -f "$REGISTRY" ]; then

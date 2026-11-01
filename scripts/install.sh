@@ -4,14 +4,15 @@ source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 
 usage() {
   cat <<EOF
-Usage: us install [--force]
+Usage: ultimate-skills install [--force]
 
 Links into your home directory:
   skills/<category>/<name>  -> ~/.claude/skills/<name>, ~/.cursor/skills/<name>
   rules/                    -> ~/.claude/rules/$NAMESPACE
+  ultimate-skills (CLI)     -> ~/.local/bin/ultimate-skills
 
 Cursor has no file-based global rules, so rules are only linked for Claude.
-Use 'us init <project>' to get Cursor rules in a project.
+Use 'ultimate-skills init <project>' to get Cursor rules in a project.
 
 Options:
   --force   Replace existing entries that don't belong to ultimate-skills
@@ -74,5 +75,11 @@ while IFS= read -r item; do
 done <<< "$(list_skills)"
 
 link "$REPO_ROOT/rules" "$HOME/.claude/rules/$NAMESPACE"
+link "$REPO_ROOT/ultimate-skills" "$BIN_LINK"
 
-ok "Installed globally (Cursor rules are per-project: use 'us init')"
+case ":$PATH:" in
+  *":$(dirname "$BIN_LINK"):"*) ;;
+  *) warn "$(dirname "$BIN_LINK") is not on your PATH; add it to use 'ultimate-skills' anywhere" ;;
+esac
+
+ok "Installed globally (Cursor rules are per-project: use 'ultimate-skills init')"
