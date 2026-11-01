@@ -1,6 +1,7 @@
 ---
 description: Prescribes the structure and components within NestJS modules, including controllers, models, DTOs, and services, ensuring API encapsulation.
-globs: src/modules/**/*.*
+paths:
+  - "src/modules/**/*"
 ---
 
 - One module per main domain/route.

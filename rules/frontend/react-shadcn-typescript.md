@@ -1,8 +1,7 @@
 ---
-alwaysApply: true
+paths:
+  - "**/*.{ts,tsx}"
 ---
-- "\*_/_.tsx"
-- "\*_/_.ts"
 
 # Use functional components with TypeScript annotations
 

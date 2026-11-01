@@ -1,10 +1,11 @@
 ---
-alwaysApply: true
+paths:
+  - "**/*.{tsx,jsx}"
 ---
 
-# Cursor React Rules (Strict – Production Quality)
+# React Rules (Strict – Production Quality)
 
-> These rules apply to **all React / Next.js / TypeScript code** generated or modified by Cursor.
+> These rules apply to **all React / Next.js / TypeScript code** generated or modified by Claude.
 > Goal: **clean, maintainable, testable, and production-ready React code**.
 
 ---
@@ -248,9 +249,9 @@ export function normalizeItem(input: File | string): TItem
 
 ---
 
-## 12. Cursor-Specific Instructions (MANDATORY)
+## 12. Claude-Specific Instructions (MANDATORY)
 
-When generating or modifying code, Cursor MUST:
+When generating or modifying code, Claude MUST:
 
 1. **Refactor before adding features**
 2. **Split files automatically**
@@ -265,7 +266,7 @@ When generating or modifying code, Cursor MUST:
 
 ## 13. Dropzone-Specific Rules
 
-Cursor MUST:
+Claude MUST:
 
 - Separate **Thumbnail** and **Gallery** modes into different components
 - Extract logic into:
@@ -281,7 +282,7 @@ Cursor MUST:
 
 ## 14. Mandatory Refactor Triggers
 
-Cursor MUST stop and refactor if:
+Claude MUST stop and refactor if:
 
 - A file exceeds **200 lines**
 - A component handles more than **2 responsibilities**
@@ -292,10 +293,10 @@ Cursor MUST stop and refactor if:
 
 ## 15. Prompt Header (REQUIRED)
 
-Add this to the top of every Cursor prompt:
+Add this to the top of every Claude prompt:
 
 ```txt
-You MUST follow the Cursor React Rules.
+You MUST follow the React Rules.
 If existing code violates the rules, refactor first.
 Do not generate monolithic components.
 Favor hooks, composition, and clarity.

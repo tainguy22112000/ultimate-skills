@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Ultimate Skills CLI entry point. Safe to symlink onto your PATH.
+set -euo pipefail
+
+self="${BASH_SOURCE[0]}"
+while [ -L "$self" ]; do
+  dir="$(cd "$(dirname "$self")" && pwd -P)"
+  self="$(readlink "$self")"
+  case "$self" in /*) ;; *) self="$dir/$self" ;; esac
+done
+ROOT="$(cd "$(dirname "$self")" && pwd -P)"
+
+usage() {
+  cat <<EOF
+Ultimate Skills: manage Claude Code and Cursor skills and rules.
+
+Usage: us <command> [args]
+
+Commands:
+  install [--force]                 Link skills and rules into ~/.claude and ~/.cursor
+  uninstall                         Remove those global links
+  init <project> [selector...]      Copy rules and skills into a project
+  deinit <project>                  Remove what init copied into a project
+  update [--no-pull]                Pull, then refresh the global install and all projects
+
+Run 'us <command> -h' for details.
+EOF
+}
+
+cmd="${1:-}"
+case "$cmd" in
+  install|uninstall|init|deinit|update) shift; exec bash "$ROOT/scripts/$cmd.sh" "$@" ;;
+  -h|--help|help|"") usage ;;
+  *) usage >&2; exit 1 ;;
+esac

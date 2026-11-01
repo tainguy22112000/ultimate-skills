@@ -1,10 +1,11 @@
 ---
-alwaysApply: true
+paths:
+  - "**/*.{ts,tsx}"
 ---
 
-# Cursor TypeScript Rules (Strict – Safe, Explicit, Scalable)
+# TypeScript Rules (Strict – Safe, Explicit, Scalable)
 
-> These rules apply to **all TypeScript code** generated or modified by Cursor.
+> These rules apply to **all TypeScript code** generated or modified by Claude.
 > Goal: **maximum type safety, clarity, maintainability, and long‑term scalability**.
 
 ---
@@ -28,7 +29,7 @@ alwaysApply: true
 
 ## 2. Strict Compiler Settings (REQUIRED)
 
-Cursor MUST assume the following:
+Claude MUST assume the following:
 
 ```json
 {
@@ -40,7 +41,7 @@ Cursor MUST assume the following:
 }
 ```
 
-If code violates these settings, Cursor MUST refactor.
+If code violates these settings, Claude MUST refactor.
 
 ---
 
@@ -291,7 +292,7 @@ Never assume error shapes.
 
 ## 14. Code Size & Complexity Limits
 
-Cursor MUST stop and refactor if:
+Claude MUST stop and refactor if:
 
 - A type definition exceeds **50 lines**
 - A generic becomes hard to explain in one sentence
@@ -301,7 +302,7 @@ Cursor MUST stop and refactor if:
 
 ## 15. Cursor‑Specific Instructions (MANDATORY)
 
-When generating or modifying TypeScript code, Cursor MUST:
+When generating or modifying TypeScript code, Claude MUST:
 
 1. Fix types before adding logic
 2. Refactor unsafe typings immediately
@@ -313,10 +314,10 @@ When generating or modifying TypeScript code, Cursor MUST:
 
 ## 16. Mandatory Prompt Header
 
-Add this to the top of every Cursor prompt:
+Add this to the top of every Claude prompt:
 
 ```txt
-You MUST follow the Cursor TypeScript Rules.
+You MUST follow the TypeScript Rules.
 Fix types first if violations exist.
 Avoid any and unsafe assertions.
 Prefer explicit, domain‑driven types.

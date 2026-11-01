@@ -1,7 +1,8 @@
 ---
-globs: src/core/**/*.*
-alwaysApply: false
+paths:
+  - "src/core/**/*"
 ---
+
 - Global filters for exception handling.
 - Global middlewares for request management.
 - Guards for permission management.

@@ -1,10 +1,11 @@
 ---
-alwaysApply: true
+paths:
+  - "**/*.{js,jsx,mjs,cjs,ts,tsx}"
 ---
 
-# Cursor JavaScript Rules (Strict – Clean, Performant, Leak‑Free)
+# JavaScript Rules (Strict – Clean, Performant, Leak‑Free)
 
-> These rules apply to **all JavaScript / TypeScript code** generated or modified by Cursor.
+> These rules apply to **all JavaScript / TypeScript code** generated or modified by Claude.
 > Goal: **clean, readable, performant code with zero avoidable memory leaks**.
 
 ---
@@ -169,7 +170,7 @@ controller.abort()
 
 ### Cleanup Rules
 
-Cursor MUST always:
+Claude MUST always:
 
 - Clear timers (`setTimeout`, `setInterval`)
 - Remove event listeners
@@ -240,7 +241,7 @@ try {
 
 ## 12. Code Size & Complexity Limits
 
-Cursor MUST stop and refactor if:
+Claude MUST stop and refactor if:
 
 - A function exceeds **30 lines**
 - Nesting exceeds \*\*2 level
